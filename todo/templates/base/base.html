@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="emerald">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ToDoOn{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">ToDoOn</h1>
+            <nav>
+                <a href="#" class="mr-4">Inicio</a>
+                <a href="#">Sobre</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 text-center">
+        <p>&copy; 2024 ToDoOn</p>
+    </footer>
+</body>
+</html>

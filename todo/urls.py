@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from todo.views import ProjetoViewSet, QuadroViewSet, ListaViewSet, CartaoViewSet, EtiquetaViewSet, AtividadeViewSet, ListaMembrosViewSet
+from todo.views import ProjetoViewSet, QuadroViewSet, ListaViewSet, CartaoViewSet, EtiquetaViewSet, AtividadeViewSet, ListaMembrosViewSet, IndexTemplateView
 
 router = DefaultRouter(trailing_slash=False)
 router.register(r'projetos', ProjetoViewSet)
@@ -12,5 +12,7 @@ router.register(r'etiquetas', EtiquetaViewSet)
 router.register(r'atividades', AtividadeViewSet)
 
 urlpatterns = [
-  path('', include(router.urls)),
+  path('api/', include(router.urls)),
+  path('home/', IndexTemplateView.as_view(), name='index'),
+
 ]

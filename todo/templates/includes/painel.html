@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="flex">
+    <div class="w-1/4 p-4">
+        <h2 class="text-lg font-semibold mb-4">To Do</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <div class="space-y-2">
+                <div class="bg-gray-100 p-2 rounded-lg">
+                    <h3 class="font-semibold">Card 1</h3>
+                    <p>Details about card 1.</p>
+                </div>
+                <div class="bg-gray-100 p-2 rounded-lg">
+                    <h3 class="font-semibold">Card 2</h3>
+                    <p>Details about card 2.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-1/4 p-4">
+        <h2 class="text-lg font-semibold mb-4">In Progress</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <div class="bg-gray-100 p-2 rounded-lg">
+                <h3 class="font-semibold">Card 3</h3>
+                <p>Details about card 3.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-1/4 p-4">
+        <h2 class="text-lg font-semibold mb-4">Done</h2>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <div class="bg-gray-100 p-2 rounded-lg">
+                <h3 class="font-semibold">Card 4</h3>
+                <p>Details about card 4.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

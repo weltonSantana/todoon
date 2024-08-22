@@ -1,41 +1,40 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="flex">
-    <div class="w-1/4 p-4">
-        <h2 class="text-lg font-semibold mb-4">To Do</h2>
-        <div class="bg-white p-4 rounded-lg shadow-md">
-            <div class="space-y-2">
-                <div class="bg-gray-100 p-2 rounded-lg">
-                    <h3 class="font-semibold">Card 1</h3>
-                    <p>Details about card 1.</p>
-                </div>
-                <div class="bg-gray-100 p-2 rounded-lg">
-                    <h3 class="font-semibold">Card 2</h3>
-                    <p>Details about card 2.</p>
-                </div>
+
+<div class="">
+    <input type="hidden" id="id_projeto" value="{{object.id}}" name="projeto">
+
+    <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold ">{{object.nome}}</h1>
+      
+        <div class="dropdown dropdown-left">
+            <div tabindex="0" role="button" class="btn  rounded-full cursor-pointer transition-al hover:text-[#fff] group hover:bg-[#202127] outline-none hover:rotate-90 duration-300 focus:outline-none focus:text-[#fff] focus:bg-[#202127]">
+                <i class="fa-solid fa-plus"></i></div>
+            <div
+              tabindex="0"
+              class="dropdown-content card card-compact bg-[#fff] text-primary-content z-[1] w-64 p-2 shadow">
+              <div class="card-body">
+                <input type="text" id="nome_lista" name="lista" placeholder="Nome da Lista" class="input input-bordered w-full">
+                <button id="criar_lista" class="btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Criar Lista</button>
+              </div>
             </div>
         </div>
+
     </div>
 
-    <div class="w-1/4 p-4">
-        <h2 class="text-lg font-semibold mb-4">In Progress</h2>
-        <div class="bg-white p-4 rounded-lg shadow-md">
-            <div class="bg-gray-100 p-2 rounded-lg">
-                <h3 class="font-semibold">Card 3</h3>
-                <p>Details about card 3.</p>
-            </div>
-        </div>
-    </div>
+    <div role="alert" id="alert-mensagem" class="mt-2 " style="display: none;"></div>
 
-    <div class="w-1/4 p-4">
-        <h2 class="text-lg font-semibold mb-4">Done</h2>
-        <div class="bg-white p-4 rounded-lg shadow-md">
-            <div class="bg-gray-100 p-2 rounded-lg">
-                <h3 class="font-semibold">Card 4</h3>
-                <p>Details about card 4.</p>
-            </div>
-        </div>
+
+    <div class="flex" id="listas-container" >
+    
+         
+       
     </div>
 </div>
+
+
+
+<script src="{% static 'todo/js/painelProjeto.js' %}"></script>
 {% endblock %}

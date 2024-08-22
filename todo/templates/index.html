@@ -3,12 +3,14 @@
 
 {% block content %}
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Criar Novo Projeto</h1>
-
-    <button class="btn btn-neutral hover:bg-[#202127]" onclick="my_modal_5.showModal()">Novo Projeto</button>
+    <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold ">Criar Novo Projeto</h1>
+        <button class="btn btn-neutral hover:bg-[#202127]" onclick="my_modal_5.showModal()">Novo Projeto</button>
+    </div>
 
     <h2 class="text-xl font-semibold mt-8">Projetos Existentes</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8  mt-2" id="projetos-container">
+    <div role="alert" id="alert-mensagem" class="mt-2 " style="display: none;"></div>
+    <div class="justify-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8  mt-2" id="projetos-container">
 
     </div>
 </div>

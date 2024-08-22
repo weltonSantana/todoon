@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from todo.models import Lista
-from todo.serializers.QuadroSerializer import QuadroSerializer
+from todo.serializers.ProjetoSerializer import ProjetoSerializer
 
 class ListaSerializer(serializers.ModelSerializer):
-    quadro = QuadroSerializer(read_only=True)
+    quadro = ProjetoSerializer(read_only=True)
 
     class Meta:
         model = Lista

@@ -1,0 +1,2 @@
+from todo.serializers.TarefasSerializer import TarefasSerializer
+from todo.serializers.SubTarefasSerializer import SubTarefasSerializer

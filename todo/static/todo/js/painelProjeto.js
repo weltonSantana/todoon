@@ -79,9 +79,8 @@ async function listarListas() {
                       
                       <div id="form-criar-cartao-${ lista.id }" style="display: none;" class="mt-2">
                           <input type="text" name="titulo" id="nome_cartao_${ lista.id }" placeholder="Título do cartão" class="input input-bordered w-full mb-2">
-                          <textarea name="descricao" id="descricao_cartao_${ lista.id }" placeholder="Descrição" class="textarea textarea-bordered w-full"></textarea>
                           <div class="flex justify-between mt-2">
-                              <button onclick="criarCartao(${ lista.id })" class="btn bg-[#5aac44] text-white">Adicionar Cartão</button>
+                              <button onclick="criarCartao(${ lista.id })" class="btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
                               <button onclick="cancelarCriacaoCartao(${ lista.id })" class="btn btn-sm text-gray-600">Cancelar</button>
                           </div>
                       </div>
@@ -167,11 +166,9 @@ function cancelarCriacaoCartao(listaId) {
 
 function criarCartao(listaId) {
   const nomeCartao = document.querySelector(`#nome_cartao_${listaId}`).value;
-  const descricaoCartao = document.querySelector(`#descricao_cartao_${listaId}`).value;
 
   let data = {
       'titulo': nomeCartao,
-      'descricao': descricaoCartao,
       'lista': listaId,
   };
 
@@ -207,7 +204,6 @@ async function listarCartoes(listaId) {
           const cartaoHtml = `
               <div class="bg-gray-100 p-2 rounded-lg mt-2" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                   <h3 class="font-semibold">${cartao.titulo}</h3>
-                  <p>${cartao.descricao}</p>
               </div>
           `;
           container.insertAdjacentHTML('beforeend', cartaoHtml);

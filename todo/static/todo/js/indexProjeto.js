@@ -44,9 +44,9 @@ async function listarProjetos() {
           var valorTruncadoDescricao = descricao.substring(0, 30)
           const rowHtml = `
             <div
-              class="service-card w-[300px] max-h-[188px] shadow-xl cursor-pointer snap-start shrink-0 py-8 px-6 bg-white flex flex-col items-start gap-3 transition-all rounded-[16px] duration-300 group hover:bg-[#202127]"
+              class="service-card w-[300px] max-h-[188px] shadow-xl cursor-pointer snap-start shrink-0 py-8 px-6 bg-white dark:bg-[#0F0E13] dark:hover:bg-[#1a103d] flex flex-col items-start gap-3 transition-all rounded-[16px] duration-300 group hover:bg-[#202127]"
             >
-              <p class="font-bold text-2xl group-hover:text-white text-black/80">
+              <p class="font-bold dark:hover:text-black/80 text-2xl group-hover:text-white dark:text-white text-black/80">
               ${valorTruncadoNome}
               </p>
               <p class="text-gray-400 text-sm">

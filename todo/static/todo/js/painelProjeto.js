@@ -64,7 +64,7 @@ async function listarListas() {
             const listaHtml = `
                 <div class="w-[400px] p-2 lista-dropzone" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
                     <div class="">
-                        <div class="bg-gray-200 rounded-[10px] p-3 flex items-center justify-between">
+                        <div class="bg-gray-200 dark:bg-[#0F0E13] dark:text-[#fff] rounded-[10px] p-3 flex items-center justify-between">
                             <p class="font-semibold ">${lista.nome}</p>
                             <div class="dropdown dropdown-left">
                                 <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
@@ -86,7 +86,7 @@ async function listarListas() {
                         </div>
 
                         <div id="adicionar-cartao-btn-${lista.id}" class="mt-4">
-                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-6 p-4 bg-gray-100 text-gray-700">+ Adicionar um cartão</button>
+                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-6 p-4 bg-gray-100 text-gray-700 dark:text-white dark:outline-[#fff] dark:bg-[#1D1C1F]">+ Adicionar um cartão</button>
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@ async function atualizarUmaLista(listaId) {
 
         data.forEach(cartao => {
             const cartaoHtml = `
-                <div class="bg-gray-200 rounded-[10px] p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div class="bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;
@@ -284,7 +284,7 @@ async function listarCartoes(listaId) {
 
         data.forEach(cartao => {
             const cartaoHtml = `
-                <div class="bg-gray-200 rounded-[10px] p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div class="bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;

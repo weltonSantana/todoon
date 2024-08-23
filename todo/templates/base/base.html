@@ -21,14 +21,23 @@
 
 </head>
 <body class="bg-gray-100 flex flex-col h-screen">
-    <header class="bg-[#184C78] text-white p-4">
+    <header class=" text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <a class="text-xl font-bold" href="{% url 'index'%}">ToDoOn</a>
+            <div class="flex items-center justify-center gap-6">
+                <a class="text-xl font-bold text-[#000]"  href="{% url 'index'%}">ToDoOn</a>
+                <div class="relative w-full max-w-sm">
+                    <input type="text" class="w-full h-0 p-4 transition-all  duration-300 group pr-10 text-sm focus:border rounded-[20px] focus:border-[#202127] focus:ring-[#202127] focus:outline-none" placeholder="Pesquisar...">
+                    <span class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <i class="fas fa-search text-gray-500"></i>
+                    </span>
+                </div>
+            </div>
             <nav>
-                <a href="#" class="mr-4">Inicio</a>
-                <a href="#">Sobre</a>
+                <a href="#" class="mr-4 text-[#000]">Inicio</a>
+                <a href="#" class=" text-[#000]">Sobre</a>
             </nav>
         </div>
+        <hr class="mt-2"/>
     </header>
 
     <main class="container mx-auto flex-grow p-4">

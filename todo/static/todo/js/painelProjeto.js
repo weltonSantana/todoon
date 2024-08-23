@@ -62,22 +62,22 @@ async function listarListas() {
 
         data.forEach(lista => {
             const listaHtml = `
-                <div class="w-1/4 p-4 lista-dropzone" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
-                    <div class="bg-white p-4 rounded-lg shadow-md">
-                        <div class="flex justify-between">
-                            <p class="font-semibold mb-4">${lista.nome}</p>
+                <div class="w-[400px] p-2 lista-dropzone" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
+                    <div class="">
+                        <div class="bg-gray-200 rounded-[10px] p-3 flex items-center justify-between">
+                            <p class="font-semibold ">${lista.nome}</p>
                             <div class="dropdown dropdown-left">
-                                <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                                <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
                                 <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                                     <li><a class="" onclick="removerLista(${lista.id})">Apagar</a></li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <div id="cartoes-container-${lista.id}" class="cartao-container" ondragover="dragOverCartao(event)">
+                        <div id="cartoes-container-${lista.id}" class="cartao-container " ondragover="dragOverCartao(event)">
                         </div>
                         
-                        <div id="form-criar-cartao-${lista.id}" style="display: none;" class="mt-2">
+                        <div id="form-criar-cartao-${lista.id}" style="display: none;" class="mt-2 ">
                             <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="input input-bordered w-full mb-2">
                             <div class="flex justify-between mt-2">
                                 <button onclick="criarCartao(${lista.id})" class="btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
@@ -85,8 +85,8 @@ async function listarListas() {
                             </div>
                         </div>
 
-                        <div id="adicionar-cartao-btn-${lista.id}" class="mt-2">
-                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="btn bg-gray-200 text-gray-700">+ Adicionar um cartão</button>
+                        <div id="adicionar-cartao-btn-${lista.id}" class="mt-4">
+                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-8 p-4 bg-gray-100 text-gray-700">+ Adicionar um cartão</button>
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@ async function atualizarUmaLista(listaId) {
 
         data.forEach(cartao => {
             const cartaoHtml = `
-                <div class="bg-gray-100 p-2 rounded-lg mt-2 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div class="bg-gray-200 rounded-[10px] p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;
@@ -280,9 +280,11 @@ async function listarCartoes(listaId) {
         const container = document.getElementById(`cartoes-container-${listaId}`);
         container.innerHTML = ''; 
 
+        console.log(data)
+
         data.forEach(cartao => {
             const cartaoHtml = `
-                <div class="bg-gray-100 p-2 rounded-lg mt-2 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div class="bg-gray-200 rounded-[10px] p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;

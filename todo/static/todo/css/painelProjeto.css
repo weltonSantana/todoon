@@ -5,12 +5,12 @@
 }
 
 .lista-dropzone.hovered {
-  border: 2px dashed #4A90E2; /* Cor da borda ao arrastar */
-  background-color: #f7f7f7; /* Cor de fundo ao arrastar */
+  border: 2px dashed #202127; 
+  background-color: #f7f7f7; 
 }
 
 .lista-dropzone.expanded {
-  min-height: 150px; /* Altura mínima ao expandir */
+  min-height: 150px; 
 }
 
 

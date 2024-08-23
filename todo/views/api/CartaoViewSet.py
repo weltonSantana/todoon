@@ -43,7 +43,6 @@ class CartaoViewSet(viewsets.ModelViewSet):
             descricao=data.get('descricao'),
             lista=Lista.objects.get(id=listaId),
         )
-        
         novoCartao.save()
         
         cartao_serialized = CartaoSerializer(novoCartao)
@@ -60,6 +59,10 @@ class CartaoViewSet(viewsets.ModelViewSet):
         cartao.descricao = data.get('descricao', cartao.descricao)
         cartao.ordem = data.get('ordem', cartao.ordem)
         cartao.lista = Lista.objects.get(id=data.get('lista')) if data.get('lista') else cartao.lista
+        
+        if 'etiquetas' in data:
+            cartao.etiquetas.set(data['etiquetas']) 
+            
         cartao.save()
 
         cartao_serialized = CartaoSerializer(cartao)

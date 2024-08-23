@@ -86,7 +86,7 @@ async function listarListas() {
                         </div>
 
                         <div id="adicionar-cartao-btn-${lista.id}" class="mt-4">
-                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-8 p-4 bg-gray-100 text-gray-700">+ Adicionar um cartão</button>
+                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-6 p-4 bg-gray-100 text-gray-700">+ Adicionar um cartão</button>
                         </div>
                     </div>
                 </div>

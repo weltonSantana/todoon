@@ -58,6 +58,7 @@ class CartaoViewSet(viewsets.ModelViewSet):
 
         cartao.titulo = data.get('titulo', cartao.titulo)
         cartao.descricao = data.get('descricao', cartao.descricao)
+        cartao.ordem = data.get('ordem', cartao.ordem)
         cartao.lista = Lista.objects.get(id=data.get('lista')) if data.get('lista') else cartao.lista
         cartao.save()
 

@@ -143,30 +143,82 @@ function dragOverCartao(ev) {
 
 
 function atualizarCartaoLista(cartaoId, novaListaId) {
-    const container = document.getElementById(`cartoes-container-${novaListaId}`);
-    const cartoes = Array.from(container.children);
-    const novoIndex = cartoes.findIndex(cartao => cartao.id === `cartao-${cartaoId}`);
+    const cartaoElement = document.getElementById(`cartao-${cartaoId}`);
+    const novaListaContainer = document.getElementById(`cartoes-container-${novaListaId}`);
+    
+    cartaoElement.remove();
 
-    let data = {
-        'lista': novaListaId,
-        'ordem': novoIndex,
-    };
+    novaListaContainer.appendChild(cartaoElement);
 
-    fetch(`/api/cartoes/${cartaoId}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "X-CSRFToken": jQuery("[name=csrfmiddlewaretoken]").val()
-        }
-    })
-    .then(response => response.json())
-    .then(json => {
-        listarListas(); 
-    })
-    .catch(err => {
+    const cartoes = Array.from(novaListaContainer.children);
+
+    cartoes.forEach((cartao, index) => {
+        const ordemAtualizada = {
+            'lista': novaListaId,
+            'ordem': index
+        };
+
+        console.log(index)
+
+        fetch(`/api/cartoes/${cartao.id.replace('cartao-', '')}`, {
+            method: "PUT",
+            body: JSON.stringify(ordemAtualizada),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                "X-CSRFToken": jQuery("[name=csrfmiddlewaretoken]").val()
+            }
+        })
+        .then(response => response.json())
+        .then(json => {
+            console.log(`Cartão ${cartao.id} atualizado para ordem ${index}`);
+            console.log(json)
+
+        })
+        .catch(err => {
+            console.error("Erro ao atualizar a ordem do cartão: ", err);
+        });
     });
 }
+
+
+async function atualizarUmaLista(listaId) {
+    try {
+        let response = await fetch(`/api/cartoes?lista=${listaId}`);
+        let data = await response.json();
+        
+        const container = document.getElementById(`cartoes-container-${listaId}`);
+        container.innerHTML = ''; 
+
+        data.forEach(cartao => {
+            const cartaoHtml = `
+                <div class="bg-gray-100 p-2 rounded-lg mt-2 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                    <h3 class="font-semibold">${cartao.titulo}</h3>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', cartaoHtml);
+        });
+
+        adicionarListenersDeDrag();
+
+    } catch (error) {
+        console.error("Erro ao buscar cartões: ", error);
+    }
+}
+
+function adicionarListenersDeDrag() {
+    const cartoes = document.querySelectorAll('.cartao');
+    cartoes.forEach(cartao => {
+        cartao.addEventListener('dragstart', () => {
+            cartao.classList.add('dragging');
+        });
+
+        cartao.addEventListener('dragend', () => {
+            cartao.classList.remove('dragging');
+        });
+    });
+}
+
+
 
 function mostrarMensagem(mensagem, tipo) {
     const mensagemDiv = document.getElementById('alert-mensagem');
@@ -237,16 +289,7 @@ async function listarCartoes(listaId) {
             container.insertAdjacentHTML('beforeend', cartaoHtml);
         });
 
-        const cartoes = document.querySelectorAll('.cartao');
-        cartoes.forEach(cartao => {
-            cartao.addEventListener('dragstart', () => {
-                cartao.classList.add('dragging');
-            });
-
-            cartao.addEventListener('dragend', () => {
-                cartao.classList.remove('dragging');
-            });
-        });
+        adicionarListenersDeDrag();
 
     } catch (error) {
         console.error("Erro ao buscar cartões: ", error);

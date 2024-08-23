@@ -12,3 +12,12 @@
 .lista-dropzone.expanded {
   min-height: 150px; /* Altura mínima ao expandir */
 }
+
+
+.cartao {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cartao.dragging {
+  opacity: 0.5;
+}

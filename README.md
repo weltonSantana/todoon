@@ -2,7 +2,9 @@
 
 **ToDoOn** é um sistema de gerenciamento de tarefas inspirado no Trello, desenvolvido com Django e Tailwind CSS. Ele permite que usuários criem, organizem e gerenciem suas tarefas em quadros, listas e cartões, facilitando o acompanhamento e a conclusão de tarefas.
 
-![alt text](image.png)
+![alt text](media/image-1.png)
+
+![alt text](media/image.png)
 
 ## Índice
 

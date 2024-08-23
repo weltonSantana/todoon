@@ -1,0 +1,14 @@
+.lista-dropzone {
+  border: 2px dashed transparent;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.lista-dropzone.hovered {
+  border: 2px dashed #4A90E2; /* Cor da borda ao arrastar */
+  background-color: #f7f7f7; /* Cor de fundo ao arrastar */
+}
+
+.lista-dropzone.expanded {
+  min-height: 150px; /* Altura mínima ao expandir */
+}

@@ -11,6 +11,9 @@ class Cartao(models.Model):
     etiquetas = models.ManyToManyField('Etiqueta', blank=True, related_name='cartoes')
     atribuidoA = models.ManyToManyField(User, blank=True, related_name='cartoes')
     dataCriacao = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['ordem']
 
     def __str__(self):
         return self.titulo

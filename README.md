@@ -20,17 +20,15 @@ ToDoOn foi desenvolvido para proporcionar uma experiência intuitiva e visual pa
 - **Cartões**: Crie cartões dentro das listas para representar tarefas individuais.
 - **Arrastar e Soltar**: Mova cartões entre listas usando uma interface drag-and-drop.
 - **Etiquetas**: Adicione etiquetas coloridas aos cartões para uma rápida identificação.
-- **Comentários**: Colabore com outros usuários comentando em cartões específicos.
 - **Datas de Vencimento**: Defina prazos para suas tarefas e receba notificações de lembrete.
 
 ## Tecnologias Utilizadas
 
-- **Backend**: Django
-- **Frontend**: Tailwind CSS, Alpine.js
+- **Backend**: Django, Django Rest Framework
+- **Frontend**: Tailwind CSS
 - **Banco de Dados**: PostgreSQL
-- **Autenticação**: Django Allauth
-- **Deploy**: Docker, Nginx, Gunicorn
-- **Outras**: Django Rest Framework, Celery para tarefas assíncronas
+- **Deploy**: Docker
+
 
 ## Instalação
 
@@ -61,5 +59,17 @@ Siga os passos abaixo para configurar o projeto localmente:
    * Atualize o arquivo .env com suas credenciais do banco de dados.
 
    * Execute as migrações
+   ```
+   python manage.py migrate
+   ```
+5. **Execute o servidor**:
+
+   ```
+   python manage.py runserver
+   ```
+
+6. **Acesse o sistema**:
+
+   * Abra seu navegador e acesse http://localhost:8000.
 
 

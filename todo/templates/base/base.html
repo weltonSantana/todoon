@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ToDoOn{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -20,7 +21,7 @@
 
 
 </head>
-<body class="bg-gray-100 flex flex-col h-screen">
+<body class="bg-gray-100  flex flex-col h-screen">
     <header class=" text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center justify-center gap-6">
@@ -32,10 +33,7 @@
                     </span>
                 </div>
             </div>
-            <nav>
-                <a href="#" class="mr-4 text-[#000]">Inicio</a>
-                <a href="#" class=" text-[#000]">Sobre</a>
-            </nav>
+            <input type="checkbox" value="synthwave" class="toggle theme-controller" />
         </div>
         <hr class="mt-2"/>
     </header>
@@ -48,5 +46,8 @@
     <footer class="bg-gray-800 text-white p-4 text-center">
         <p>&copy; 2024 ToDoOn</p>
     </footer>
+
+    <script src="{% static 'todo/js/baseProjeto.js' %}"></script>
+
 </body>
 </html>

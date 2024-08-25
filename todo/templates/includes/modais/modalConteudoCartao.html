@@ -1,0 +1,35 @@
+{% for dados in dadosCartao%}
+<dialog id="modalConteudoCartao{{dados.id}}" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box w-11/12 h-[500px] max-w-5xl">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <div class="card ">
+        <form class="card-body" id="form-projeto">
+            {% csrf_token %}
+                <label class="" for="id_titulo">Titulo:</label>
+                <input class="input input-bordered w-full " type="text" id="id_titulo" name="titulo">
+
+                <label class="" for="id_descricao">Descrição:</label>
+                <textarea class="textarea textarea-bordered" id="id_descricao" name="descricao"></textarea>
+
+                <div class="dropdown ">
+                    <div tabindex="0" role="button" class="btn dark:bg-[#1D1C1F] dark:text-[#fff] bg-base-100 rounded-full cursor-pointer transition-all hover:text-[#fff] group hover:bg-[#202127] outline-none hover:rotate-90 duration-300 focus:outline-none focus:text-[#fff] dark:focus:text-[#202127] focus:bg-[#202127] dark:focus:bg-[#fff]">
+                        <i class="fa-solid fa-plus"></i></div>
+                    <div
+                      tabindex="0"
+                      class="dropdown-content card card-compact bg-[#fff] text-primary-content z-[1] w-64 p-2 shadow">
+                      <div class="card-body">
+                        <label class="" for="id_etiquetas">Etiquetas:</label>
+                        <input class="input input-bordered w-full " type="text" id="id_etiquetas" name="etiquetas">
+                        <button id="criar_lista" class="btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Salvar Etiqueta</button>
+                      </div>
+                    </div>
+                </div>
+
+                <button type="reset" class="btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0" id="criar-projeto">Criar Projeto</button>
+        </form>
+    </div>
+  </div>
+</dialog>
+{%endfor%}

@@ -282,9 +282,11 @@ async function listarCartoes(listaId) {
 
         console.log(data)
 
+        
+
         data.forEach(cartao => {
             const cartaoHtml = `
-                <div class="bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div onclick="modalConteudoCartao${cartao.id}.showModal()" class="bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;

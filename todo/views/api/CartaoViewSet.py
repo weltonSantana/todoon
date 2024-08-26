@@ -3,6 +3,7 @@ from todo.models import Cartao, Lista
 from todo.serializers import CartaoSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
 class CartaoViewSet(viewsets.ModelViewSet):
     queryset = Cartao.objects.all()
     serializer_class = CartaoSerializer

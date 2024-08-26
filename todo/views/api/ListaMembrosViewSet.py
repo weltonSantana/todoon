@@ -4,8 +4,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from todo.serializers.ListaMembrosSerializer import ListaMembrosSerializer
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.permissions import IsAuthenticated
 
-class ListaMembrosViewSet(viewsets.ModelViewSet):
+
+class ListaMembrosViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
     queryset = ListaMembros.objects.all()
     serializer_class = ListaMembrosSerializer
     permission_classes = [IsAuthenticated]

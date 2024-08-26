@@ -89,6 +89,10 @@ DATABASES = {
     }
 }
 
+
+LOGIN_URL = '/login/'
+
+
 ROOT_URLCONF = 'project.urls'
 
 # Password validation

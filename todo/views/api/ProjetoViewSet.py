@@ -3,9 +3,10 @@ from todo.models import Projeto
 from todo.serializers import ProjetoSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProjetoViewSet(viewsets.ModelViewSet):
+class ProjetoViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
     queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
     permission_classes = [IsAuthenticated]

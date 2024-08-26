@@ -1,8 +1,9 @@
 from django.views.generic import TemplateView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from todo.models import Projeto, Cartao
 
-class PainelDetailView(DetailView):
+class PainelDetailView(LoginRequiredMixin, DetailView):
   model = Projeto
   template_name = "includes/painel.html"
   

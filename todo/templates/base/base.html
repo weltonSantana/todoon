@@ -22,6 +22,7 @@
 
 </head>
 <body class="bg-gray-100 dark:bg-[#1D1C1F] flex flex-col h-screen">
+    {% if not request.resolver_match.url_name == 'login' %}
     <header class=" text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center justify-center gap-6">
@@ -33,20 +34,33 @@
                     </span>
                 </div>
             </div>
+            {% if user.is_authenticated %}
+
+            <button onclick="modalSair.showModal()" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn bg-gray-100 mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">
+                Sair
+            </button>
+            {% endif %}
+
         </div>
         <hr class="mt-2 dark:border-[#3b3b3b]"/>
     </header>
+    {% endif %}
+
 
     <main class="container mx-auto flex-grow p-4">
         {% block content %}
         {% endblock %}
     </main>
 
+    {% if not request.resolver_match.url_name == 'login' %}
     <footer class="bg-gray-800 dark:bg-[#0F0E13] text-white p-4 text-center">
         <p>&copy; 2024 ToDoOn</p>
     </footer>
+    {% endif %}
 
     <script src="{% static 'todo/js/baseProjeto.js' %}"></script>
+    {% include 'includes/modais/modalSair.html' %}
+
 
 </body>
 </html>

@@ -1,0 +1,17 @@
+<dialog id="modalSair" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box dark:bg-[#1D1C1F] ">
+      <form method="dialog">
+        <button class="btn btn-sm dark:text-white btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="card ">
+        <h1 class="text-2xl font-bold dark:text-white ">Deseja realmente sair?</h1>
+
+        <form action="{% url 'sair' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <div class="flex justify-end items-center">
+                <button type="submit" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Sair</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </dialog>

@@ -7,4 +7,6 @@ from todo.views.api.AtividadeViewSet import AtividadeViewSet
 from todo.views.api.ListaMembrosViewSet import ListaMembrosViewSet
 from todo.views.templateView.IndexTemplateView import IndexTemplateView
 from todo.views.templateView.PainelDetailView import PainelDetailView
+from todo.views.loginView.LoginView import CustomLoginView
+from todo.views.loginView.SairView import SairView
 

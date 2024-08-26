@@ -3,9 +3,10 @@ from todo.models import Projeto, Quadro
 from todo.serializers import QuadroSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class QuadroViewSet(viewsets.ModelViewSet):
+class QuadroViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
     queryset = Quadro.objects.all()
     serializer_class = QuadroSerializer
     permission_classes = [IsAuthenticated]

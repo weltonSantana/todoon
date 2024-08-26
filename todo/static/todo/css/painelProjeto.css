@@ -13,6 +13,15 @@
   min-height: 150px; 
 }
 
+.lista-dropzones {
+  border: 2px dashed transparent;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.lista-dropzones.hovered {
+  background-color: #333333; 
+}
 
 .cartao {
   transition: transform 0.2s ease, opacity 0.2s ease;

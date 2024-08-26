@@ -62,13 +62,13 @@ async function listarListas() {
 
         data.forEach(lista => {
             const listaHtml = `
-                <div class="w-[400px] p-2 lista-dropzone" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
+                <div class="w-[400px] p-2 lista-dropzone dark:lista-dropzones" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
                     <div class="">
                         <div class="bg-gray-200 dark:bg-[#0F0E13] dark:text-[#fff] rounded-[10px] p-3 flex items-center justify-between">
                             <p class="font-semibold ">${lista.nome}</p>
                             <div class="dropdown dropdown-left">
                                 <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
-                                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                <ul tabindex="0" class="dropdown-content dark:border-[#fff] dark:bg-[#3b3b3b] dark:text-white menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                                     <li><a class="" onclick="removerLista(${lista.id})">Apagar</a></li>
                                 </ul>
                             </div>
@@ -78,9 +78,9 @@ async function listarListas() {
                         </div>
                         
                         <div id="form-criar-cartao-${lista.id}" style="display: none;" class="mt-2 ">
-                            <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="input input-bordered w-full mb-2">
+                            <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="dark:bg-[#3b3b3b] input input-bordered w-full mb-2">
                             <div class="flex justify-between mt-2">
-                                <button onclick="criarCartao(${lista.id})" class="btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
+                                <button onclick="criarCartao(${lista.id})" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
                                 <button onclick="cancelarCriacaoCartao(${lista.id})" class="btn btn-sm text-gray-600">Cancelar</button>
                             </div>
                         </div>

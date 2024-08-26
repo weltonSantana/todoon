@@ -3,8 +3,10 @@ from todo.models import Cartao, Lista
 from todo.serializers import CartaoSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class CartaoViewSet(viewsets.ModelViewSet):
+
+class CartaoViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     queryset = Cartao.objects.all()
     serializer_class = CartaoSerializer
     permission_classes = [IsAuthenticated]

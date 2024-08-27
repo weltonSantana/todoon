@@ -36,9 +36,12 @@
             </div>
             {% if user.is_authenticated %}
 
-            <button onclick="modalSair.showModal()" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn bg-gray-100 mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">
-                Sair
-            </button>
+            <div class="dropdown dropdown-end ">
+                <div tabindex="0" role="button" class="btn bg-gray-200 rounded-full m-1"><i class="fa-solid fa-user"></i></div>
+                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                  <li><a class="text-[#202127] dark:text-white" onclick="modalSair.showModal()" >Sair</a></li>
+                </ul>
+              </div>
             {% endif %}
 
         </div>

@@ -1,68 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Room</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      #chat-log {
-        width: 100%;
-        height: 300px;
-        margin-bottom: 10px;
-      }
-      #chat-message-input {
-        width: calc(100% - 110px);
-        margin-right: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Chat Room: {{ room_name }}</h1>
-    <textarea id="chat-log" readonly></textarea><br />
-    <input
-      id="chat-message-input"
-      type="text"
-      placeholder="Type your message here..."
-    />
-    <button id="chat-message-submit">Send</button>
+{% extends 'base/base.html' %} {% load static %} {% block content %}
 
-    <script>
-      const roomName = "{{ room_name }}";
-      const chatSocket = new WebSocket(
-        "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
-      );
+<div
+  class="flex flex-col items-center justify-center min-h-screen p-4 bg-[#fff] dark:bg-[#0F0E13]"
+>
+  <h1 class="text-3xl font-bold text-[#1D1C1F] dark:text-white mb-6">
+    Chat Room: teste
+  </h1>
 
-      chatSocket.onmessage = function (e) {
-        const data = JSON.parse(e.data);
-        document.querySelector("#chat-log").value += data.message + "\n";
-      };
+  <div
+    class="w-full max-w-lg p-4 bg-white dark:bg-[#1D1C1F] shadow-md rounded-[20px]"
+  >
+    <textarea
+      id="chat-log"
+      readonly
+      class="w-full h-64 p-2 mb-4 border border-[#202127] dark:border-[#fff] rounded-md resize-none bg-[#fff] dark:bg-[#0F0E13] text-[#1D1C1F] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#202127] dark:focus:ring-[#fff]"
+      placeholder="Chat log will appear here..."
+    >
+    </textarea>
 
-      chatSocket.onclose = function (e) {
-        console.error("Chat socket closed unexpectedly");
-      };
+    <div class="flex items-center">
+      <input
+        id="chat-message-input"
+        type="text"
+        class="flex-grow p-2 mr-2 border border-[#202127] dark:border-[#fff] rounded-md bg-[#fff] dark:bg-[#0F0E13] text-[#1D1C1F] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#202127] dark:focus:ring-[#fff]"
+        placeholder="Type your message here..."
+      />
+      <button
+        id="chat-message-submit"
+        class="px-4 py-2 bg-[#1D1C1F] dark:bg-[#fff] text-white dark:text-[#1D1C1F] font-semibold rounded-md hover:bg-[#202127] dark:hover:bg-[#1D1C1F] hover:text-[#fff] dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-[#202127] dark:focus:ring-[#fff]"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+</div>
 
-      document.querySelector("#chat-message-input").focus();
-      document.querySelector("#chat-message-input").onkeyup = function (e) {
-        if (e.keyCode === 13) {
-          // Pressione Enter para enviar
-          document.querySelector("#chat-message-submit").click();
-        }
-      };
+<script>
+  const roomName = "{{ room_name }}";
+  const chatSocket = new WebSocket(
+    "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
+  );
 
-      document.querySelector("#chat-message-submit").onclick = function (e) {
-        const messageInputDom = document.querySelector("#chat-message-input");
-        const message = messageInputDom.value;
-        chatSocket.send(
-          JSON.stringify({
-            message: message,
-          })
-        );
-        messageInputDom.value = "";
-      };
-    </script>
-  </body>
-</html>
+  chatSocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    document.querySelector("#chat-log").value += data.message + "\n";
+  };
+
+  chatSocket.onclose = function (e) {
+    console.error("Chat socket closed unexpectedly");
+  };
+
+  document.querySelector("#chat-message-input").focus();
+  document.querySelector("#chat-message-input").onkeyup = function (e) {
+    if (e.keyCode === 13) {
+      // Pressione Enter para enviar
+      document.querySelector("#chat-message-submit").click();
+    }
+  };
+
+  document.querySelector("#chat-message-submit").onclick = function (e) {
+    const messageInputDom = document.querySelector("#chat-message-input");
+    const message = messageInputDom.value;
+    chatSocket.send(
+      JSON.stringify({
+        message: message,
+      })
+    );
+    messageInputDom.value = "";
+  };
+</script>
+
+{% endblock %}

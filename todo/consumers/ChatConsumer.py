@@ -6,7 +6,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = f'chat_{self.room_name}'
 
-        # Entrar no grupo da sala
+        # Entrar no grupo da sala usando o Redis como backend
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
@@ -25,7 +25,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 
-        # Enviar mensagem para o grupo da sala
+        # Enviar mensagem para o grupo da sala via Redis
         await self.channel_layer.group_send(
             self.room_group_name,
             {

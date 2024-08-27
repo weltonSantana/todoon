@@ -7,10 +7,10 @@
         <form class="card-body dark:text-white " id="form-projeto">
             {% csrf_token %}
                 <label class="" for="id_nome">Nome:</label>
-                <input class=" dark:bg-[#3b3b3b] input input-bordered w-full " type="text" id="id_nome" name="nome">
+                <input class=" dark:bg-[#3b3b3b] dark:text-white input input-bordered w-full " type="text" id="id_nome" name="nome">
 
                 <label class="" for="id_descricao">Descrição:</label>
-                <textarea class="textarea dark:bg-[#3b3b3b] textarea-bordered" id="id_descricao" name="descricao"></textarea>
+                <textarea class="textarea dark:bg-[#3b3b3b] dark:text-white textarea-bordered" id="id_descricao" name="descricao"></textarea>
 
                 <button type="reset" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0" id="criar-projeto">Criar Projeto</button>
         </form>

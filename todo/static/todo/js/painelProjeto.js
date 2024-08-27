@@ -78,7 +78,7 @@ async function listarListas() {
                         </div>
                         
                         <div id="form-criar-cartao-${lista.id}" style="display: none;" class="mt-2 ">
-                            <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="dark:bg-[#3b3b3b] input input-bordered w-full mb-2">
+                            <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="dark:bg-[#3b3b3b] input input-bordered dark:text-white w-full mb-2">
                             <div class="flex justify-between mt-2">
                                 <button onclick="criarCartao(${lista.id})" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
                                 <button onclick="cancelarCriacaoCartao(${lista.id})" class="btn btn-sm text-gray-600">Cancelar</button>

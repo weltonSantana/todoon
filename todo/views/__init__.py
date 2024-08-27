@@ -9,4 +9,4 @@ from todo.views.templateView.IndexTemplateView import IndexTemplateView
 from todo.views.templateView.PainelDetailView import PainelDetailView
 from todo.views.loginView.LoginView import CustomLoginView
 from todo.views.loginView.SairView import SairView
-
+from todo.views.testeView import chat_room

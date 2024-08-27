@@ -16,10 +16,19 @@ services:
     networks:
       - app-network
 
+  redis:
+    container_name: todoon_redis
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379 # Tornando o Redis acessível a outros containers na rede
+    networks:
+      - app-network
+
   web:
     container_name: todoon_app
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: daphne -b 0.0.0.0 -p 8000 project.asgi:application # Usando Daphne para ASGI
     ports:
       - 8000:8000
     volumes:
@@ -27,6 +36,7 @@ services:
     working_dir: /app
     depends_on:
       - db
+      - redis
     restart: always
     env_file:
       - .env

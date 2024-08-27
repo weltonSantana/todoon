@@ -19,11 +19,11 @@ function criarLista() {
     .then(json => {
         listarListas();
         mostrarMensagem('Lista criada com sucesso!', 'success');
-        console.log('Lista Criada com sucesso!');
+        // console.log('Lista Criada com sucesso!');
     })
     .catch(err => {
         mostrarMensagem(err.message, 'error');
-        console.log("erro")
+        // console.log("erro")
     });
 }
 
@@ -38,7 +38,7 @@ async function removerLista(listaId) {
           }
       });
       if (response.ok) {
-          console.log('Projeto removido');
+        //   console.log('Projeto removido');
           mostrarMensagem('Lista removido com sucesso!', 'success');
           listarListas();  
       } else {
@@ -56,7 +56,7 @@ async function listarListas() {
     try {
         var response = await fetch(`/api/listas?projeto=${projetoId}`);
         let data = await response.json();
-        console.log(data);
+        // console.log(data);
         const container = document.getElementById('listas-container');
         container.innerHTML = ''; 
 
@@ -158,7 +158,7 @@ function atualizarCartaoLista(cartaoId, novaListaId) {
             'ordem': index
         };
 
-        console.log(index)
+        // console.log(index)
 
         fetch(`/api/cartoes/${cartao.id.replace('cartao-', '')}`, {
             method: "PUT",
@@ -170,8 +170,8 @@ function atualizarCartaoLista(cartaoId, novaListaId) {
         })
         .then(response => response.json())
         .then(json => {
-            console.log(`Cartão ${cartao.id} atualizado para ordem ${index}`);
-            console.log(json)
+            // console.log(`Cartão ${cartao.id} atualizado para ordem ${index}`);
+            // console.log(json)
 
         })
         .catch(err => {
@@ -263,11 +263,11 @@ function criarCartao(listaId) {
   .then(response => response.json())
   .then(json => {
       listarCartoes(listaId);
-      mostrarMensagem('Cartão criado com sucesso!', 'success');
+    //   mostrarMensagem('Cartão criado com sucesso!', 'success');
       cancelarCriacaoCartao(listaId); 
   })
   .catch(err => {
-      mostrarMensagem(err.message, 'error');
+    //   mostrarMensagem(err.message, 'error');
   });
 }
 
@@ -280,7 +280,7 @@ async function listarCartoes(listaId) {
         const container = document.getElementById(`cartoes-container-${listaId}`);
         container.innerHTML = ''; 
 
-        console.log(data)
+        // console.log(data)
 
         
 

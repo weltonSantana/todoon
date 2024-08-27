@@ -18,7 +18,7 @@ function criarProjeto() {
     .then(json => {
         listarProjetos();
         mostrarMensagem('Projeto criado com sucesso!', 'success');
-        console.log('Projeto Criado com sucesso!');
+        // console.log('Projeto Criado com sucesso!');
     })
     .catch(err => {
         // console.error('Error:', err);
@@ -33,7 +33,7 @@ async function listarProjetos() {
   try {
       var response = await fetch(`/api/projetos`);
       let data = await response.json();
-      console.log(data)
+      // console.log(data)
       const container = document.getElementById('projetos-container');
       container.innerHTML = ''; 
 

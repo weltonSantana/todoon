@@ -14,7 +14,13 @@ function criarProjeto() {
             "X-CSRFToken": jQuery("[name=csrfmiddlewaretoken]").val()
         }
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+           
+            return response.json().then(err => { throw new Error(err.error); });
+        }
+        return response.json();
+    })
     .then(json => {
         listarProjetos();
         mostrarMensagem('Projeto criado com sucesso!', 'success');

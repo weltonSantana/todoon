@@ -15,14 +15,20 @@ function criarLista() {
             "X-CSRFToken": jQuery("[name=csrfmiddlewaretoken]").val()
         }
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+           
+            return response.json().then(err => { throw new Error(err.error); });
+        }
+        return response.json();
+    })
     .then(json => {
         listarListas();
         mostrarMensagem('Lista criada com sucesso!', 'success');
         // console.log('Lista Criada com sucesso!');
     })
     .catch(err => {
-        mostrarMensagem(err.message, 'error');
+        mostrarMensagem('O Nome é obrigatório', 'error');
         // console.log("erro")
     });
 }
@@ -75,7 +81,7 @@ async function listarListas() {
                                 <div class="dropdown dropdown-left">
                                     <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
                                     <ul tabindex="0" class="dropdown-content dark:border-[#fff] dark:bg-[#3b3b3b] dark:text-white menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                        <li><a class="" onclick="removerLista(${lista.id})">Apagar</a></li>
+                                        <li><a class="text-[#cc1f0f]" onclick="removerLista(${lista.id})"> <i class="fa-regular fa-trash-can"></i> Apagar</a></li>
                                     </ul>
                                 </div>
                             </div>

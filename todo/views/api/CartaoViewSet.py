@@ -39,12 +39,20 @@ class CartaoViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
     def create(self, request):
         data = request.data
         listaId = data.get('lista')
+        titulo = data.get('titulo')
         
+        if not titulo or titulo.strip() == '':
+            return Response({'error': 'O título é obrigatório.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            lista = Lista.objects.get(id=listaId)
+        except Lista.DoesNotExist:
+            return Response({'error': 'A lista especificada não existe.'}, status=status.HTTP_404_NOT_FOUND)
 
         novoCartao = Cartao(
-            titulo=data.get('titulo'),
+            titulo=titulo,
             descricao=data.get('descricao'),
-            lista=Lista.objects.get(id=listaId),
+            lista=lista
         )
         novoCartao.save()
         

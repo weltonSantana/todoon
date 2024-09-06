@@ -30,6 +30,7 @@ class ListaMembrosViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
         status = 200
         return Response(status=status)
     
+    
     def create(self, request):
         data = request.data
         listaMembro = ListaMembros()

@@ -11,15 +11,23 @@ class ProjetoViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
     serializer_class = ProjetoSerializer
     permission_classes = [IsAuthenticated]
     
+    def get_queryset(self):
+        user = self.request.user
+        return Projeto.objects.filter(dono=user)
+
     def retrieve(self, request, *args, **kwargs):
         term = kwargs.get('pk')
-        projeto = Projeto.objects.filter(id=term)
-        print(f'Kwargs: {kwargs}')
-            
-        projeto_serialized = ProjetoSerializer(projeto, many=True)
+        user = request.user
+
+        try:
+            projeto = Projeto.objects.get(id=term, dono=user)
+        except Projeto.DoesNotExist:
+            return Response({'mensagem': 'Projeto não encontrado ou você não tem permissão para visualizar.'}, status=status.HTTP_404_NOT_FOUND)
+
+        projeto_serialized = ProjetoSerializer(projeto)
         responseData = projeto_serialized.data
         
-        return Response(responseData,status=status.HTTP_200_OK)
+        return Response(responseData, status=status.HTTP_200_OK)
     
     def destroy(request, *args, **kwargs):
         term = kwargs.get('pk')
@@ -28,11 +36,17 @@ class ProjetoViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
         status = 200
         return Response(status=status)
     
+    
     def create(self, request):
         data = request.data
+        
+        nome = data.get('nome')
+        
+        if not nome or nome.strip() == '':
+            return Response({'error': 'O Nome é obrigatório.'}, status=status.HTTP_400_BAD_REQUEST)
 
         novoProjeto = Projeto(
-            nome=data.get('nome'),
+            nome=nome,
             descricao=data.get('descricao'),
             dono=request.user,
         )

@@ -36,11 +36,17 @@ class ProjetoViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
         status = 200
         return Response(status=status)
     
+    
     def create(self, request):
         data = request.data
+        
+        nome = data.get('nome')
+        
+        if not nome or nome.strip() == '':
+            return Response({'error': 'O Nome é obrigatório.'}, status=status.HTTP_400_BAD_REQUEST)
 
         novoProjeto = Projeto(
-            nome=data.get('nome'),
+            nome=nome,
             descricao=data.get('descricao'),
             dono=request.user,
         )

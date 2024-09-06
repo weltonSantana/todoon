@@ -64,6 +64,9 @@
     <main class="container mx-auto flex-grow p-4">
         {% block content %}
         {% endblock %}
+        <div class="tooltip  fixed bottom-16 right-4 mb-14 flex flex-col gap-2  w-10 text-[10px] text-xs z-50" data-tip="Ajuda?">
+          <button onclick="modalAjuda.showModal()" class="btn bg-gray-200 dark:bg-[#1D1C1F] dark:hover:bg-white dark:hover:text-black border-1 rounded-full dark:text-white border-[#0F0E13] dark:border-[#fff] text-black fixed bottom-4 right-4 mb-14 flex flex-col gap-2  w-10 text-[10px] text-xs z-50"><i class="fa-solid fa-info"></i></button>
+        </div>
     </main>
 
     {% if not request.resolver_match.url_name == 'login' %}
@@ -74,37 +77,8 @@
 
     <script src="{% static 'todo/js/baseProjeto.js' %}"></script>
     {% include 'includes/modais/modalSair.html' %}
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-      };
-
-      function applyTheme() {
-        const theme = localStorage.getItem('theme');
-        const checkbox = document.querySelector('.theme-controller');
-
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark');
-          checkbox.checked = true;
-        } else {
-          document.documentElement.classList.remove('dark');
-          checkbox.checked = false;
-        }
-      }
-
-      window.onload = applyTheme;
-
-      function toggleTheme() {
-        const checkbox = document.querySelector('.theme-controller');
-        if (checkbox.checked) {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        }
-      }
-    </script>
+    {% include 'includes/modais/modalAjuda.html' %}
+    
 
 </body>
 </html>

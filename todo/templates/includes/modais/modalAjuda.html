@@ -1,0 +1,73 @@
+<dialog id="modalAjuda" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold" id="modal-title">Bem-vindo ao todoOn!</h3>
+    <p class="py-4" id="modal-content">
+      O sistema todoOn é um sistema de gerenciamento de tarefas simples. O primeiro passo é criar um projeto. Esse projeto será o quadro onde você criará listas e tarefas para cada lista.
+    </p>
+    <div class="flex justify-between mt-4">
+      <button id="prev-step" class="btn btn-sm hidden">Anterior</button>
+      <button id="next-step" class="btn btn-sm">Próximo</button>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button class="hidden">close</button>
+  </form>
+</dialog>
+
+<script>
+  // Definindo os textos para cada step
+  const steps = [
+    {
+      title: 'Bem-vindo ao todoOn!',
+      content: 'O sistema todoOn é um sistema de gerenciamento de tarefas simples. O primeiro passo é criar um quadro. Esse quadro será onde você criará listas e tarefas.'
+    },
+    {
+      title: 'Criar uma lista',
+      content: 'Após criar o projeto, selecione-o. Em seguida, clique no botão "+" para criar uma nova lista. Insira o nome da lista e, após isso, você pode clicar em "Adicionar um cartão" para criar as tarefas dentro dessa lista.'
+    },
+  ];
+
+  let currentStep = 0;
+
+  const modal = document.getElementById('modalAjuda');
+  const modalTitle = document.getElementById('modal-title');
+  const modalContent = document.getElementById('modal-content');
+  const prevButton = document.getElementById('prev-step');
+  const nextButton = document.getElementById('next-step');
+
+  function updateModal(stepIndex) {
+    modalTitle.textContent = steps[stepIndex].title;
+    modalContent.textContent = steps[stepIndex].content;
+
+    prevButton.classList.toggle('hidden', stepIndex === 0);
+    nextButton.textContent = stepIndex === steps.length - 1 ? 'Fechar' : 'Próximo';
+  }
+
+  nextButton.addEventListener('click', () => {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      updateModal(currentStep);
+    } else {
+      modal.close(); 
+      localStorage.setItem('modalAjudaShown', 'true');
+    }
+  });
+
+  prevButton.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      updateModal(currentStep);
+    }
+  });
+
+  function checkModal() {
+    const modalShown = localStorage.getItem('modalAjudaShown');
+    if (!modalShown) {
+      modal.showModal();  
+      updateModal(0);  
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', checkModal);
+
+</script>

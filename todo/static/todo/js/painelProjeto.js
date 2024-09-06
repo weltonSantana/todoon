@@ -353,17 +353,54 @@ async function listarCartoes(listaId) {
         const container = document.getElementById(`cartoes-container-${listaId}`);
         container.innerHTML = ''; 
 
-        // console.log(data)
-
-        
-
         data.forEach(cartao => {
+            // Criação do HTML do cartão e do modal correspondente
             const cartaoHtml = `
-                <div onclick="modalConteudoCartao${cartao.id}.showModal()" class="text-black bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div class="text-black bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff] p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;
+
+            const modalHtml = `
+                <dialog id="modalConteudoCartao${cartao.id}" class="modal modal-bottom sm:modal-middle">
+                    <div class="modal-box w-11/12 h-[500px] max-w-5xl">
+                        <form method="dialog">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card ">
+                            <form class="card-body" id="form-cartao-${cartao.id}">
+                                <label class="" for="id_titulo">Titulo:</label>
+                                <input class="input dark:text-white input-bordered w-full" type="text" id="id_titulo" name="titulo" value="${cartao.titulo}">
+
+                                <label class="" for="id_descricao">Descrição:</label>
+                                <textarea class="textarea dark:text-white textarea-bordered" id="id_descricao" name="descricao">${cartao.descricao || ''}</textarea>
+
+                                <div class="dropdown">
+                                    <div tabindex="0" role="button" class="btn dark:bg-[#1D1C1F] dark:text-[#fff] bg-base-100 rounded-full cursor-pointer transition-all hover:text-[#fff] group hover:bg-[#202127] outline-none hover:rotate-90 duration-300 focus:outline-none focus:text-[#fff] dark:focus:text-[#202127] focus:bg-[#202127] dark:focus:bg-[#fff]">
+                                        <i class="fa-solid fa-plus"></i></div>
+                                    <div tabindex="0" class="dropdown-content card card-compact bg-[#fff] text-primary-content z-[1] w-64 p-2 shadow">
+                                        <div class="card-body">
+                                            <label class="" for="id_etiquetas">Etiquetas:</label>
+                                            <input class="input dark:text-white input-bordered w-full" type="text" id="id_etiquetas" name="etiquetas">
+                                            <button id="criar_etiqueta_${cartao.id}" class="btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Salvar Etiqueta</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="reset" class="btn bg-[#fff] mt-2 border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Salvar Alterações</button>
+                            </form>
+                        </div>
+                    </div>
+                </dialog>
+            `;
+
             container.insertAdjacentHTML('beforeend', cartaoHtml);
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+            document.querySelector(`#cartao-${cartao.id}`).addEventListener('click', () => {
+                document.getElementById(`modalConteudoCartao${cartao.id}`).showModal();
+            });
         });
 
         adicionarListenersDeDrag();
@@ -372,6 +409,7 @@ async function listarCartoes(listaId) {
         console.error("Erro ao buscar cartões: ", error);
     }
 }
+
 
 
 document.addEventListener('DOMContentLoaded', () => {

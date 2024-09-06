@@ -56,7 +56,6 @@ async function listarListas() {
     try {
         var response = await fetch(`/api/listas?projeto=${projetoId}`);
         let data = await response.json();
-        // console.log(data);
         const container = document.getElementById('listas-container');
         container.innerHTML = ''; 
 
@@ -65,9 +64,11 @@ async function listarListas() {
         } else{
             $('#ErroMensagem').hide(); 
 
+            container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2';  
+
             data.forEach(lista => {
                 const listaHtml = `
-                    <div class="text-black w-[400px] p-2 lista-dropzone dark:lista-dropzones" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
+                    <div class="text-black w-full sm:w-[300px] lg:w-[350px] p-2 lista-dropzone dark:lista-dropzones" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
                         <div class="">
                             <div class="bg-gray-200 dark:bg-[#0F0E13] dark:text-[#fff] rounded-[10px] p-3 flex items-center justify-between">
                                 <p class="font-semibold ">${lista.nome}</p>
@@ -94,6 +95,7 @@ async function listarListas() {
                                 <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-6 p-4 bg-gray-100 text-gray-700 dark:text-white dark:outline-[#fff] dark:bg-[#1D1C1F]">+ Adicionar um cartão</button>
                             </div>
                         </div>
+                        <hr class="mt-4 mb-2 dark:border-[#3b3b3b]">
                     </div>
                 `;
                 container.insertAdjacentHTML('beforeend', listaHtml);
@@ -101,7 +103,6 @@ async function listarListas() {
             });
         }
 
-        
     } catch (error) {
         console.error("Erro ao buscar listas: ", error);
         $('#tabela-alimentos-projetos').html('<tr><td colspan="5" class="text-center">Erro ao carregar dados.</td></tr>');

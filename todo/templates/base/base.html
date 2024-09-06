@@ -36,7 +36,7 @@
             </div>
             
 
-            <div class="flex justify-center items-center gap-6">
+            <div class="flex justify-center items-center gap-6 ml-2">
               <input type="checkbox" value="dark" class="toggle theme-controller" onchange="toggleTheme()" />
 
               {% if user.is_authenticated %}
@@ -70,40 +70,37 @@
 
     <script src="{% static 'todo/js/baseProjeto.js' %}"></script>
     {% include 'includes/modais/modalSair.html' %}
-<script>
-    tailwind.config = {
-      darkMode: 'class',
-    };
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
 
-    // Função para aplicar o modo escuro com base no localStorage
-    function applyTheme() {
-      const theme = localStorage.getItem('theme');
-      const checkbox = document.querySelector('.theme-controller');
+      function applyTheme() {
+        const theme = localStorage.getItem('theme');
+        const checkbox = document.querySelector('.theme-controller');
 
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-        checkbox.checked = true;
-      } else {
-        document.documentElement.classList.remove('dark');
-        checkbox.checked = false;
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          checkbox.checked = true;
+        } else {
+          document.documentElement.classList.remove('dark');
+          checkbox.checked = false;
+        }
       }
-    }
 
-    // Chama a função para aplicar o tema ao carregar a página
-    window.onload = applyTheme;
+      window.onload = applyTheme;
 
-    // Função para alternar entre o modo claro e escuro
-    function toggleTheme() {
-      const checkbox = document.querySelector('.theme-controller');
-      if (checkbox.checked) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
+      function toggleTheme() {
+        const checkbox = document.querySelector('.theme-controller');
+        if (checkbox.checked) {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
       }
-    }
-  </script>
+    </script>
 
 </body>
 </html>

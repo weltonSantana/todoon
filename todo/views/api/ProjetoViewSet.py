@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from todo.models import Projeto
+from todo.models import Projeto, Lista
 from todo.serializers import ProjetoSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -52,6 +52,19 @@ class ProjetoViewSet(LoginRequiredMixin,viewsets.ModelViewSet):
         )
         
         novoProjeto.save()
+
+        listas_padrao = [
+            {"nome": "Tarefas", "ordem": 1},
+            {"nome": "Em andamento", "ordem": 2},
+            {"nome": "Concluídas", "ordem": 3},
+        ]
+
+        for lista_data in listas_padrao:
+            Lista.objects.create(
+                nome=lista_data["nome"],
+                projeto=novoProjeto,
+                ordem=lista_data["ordem"]
+            )
         
         projeto_serialized = ProjetoSerializer(novoProjeto)
         return Response(projeto_serialized.data, status=status.HTTP_201_CREATED)

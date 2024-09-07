@@ -29,9 +29,47 @@ function criarLista() {
     })
     .catch(err => {
         mostrarMensagem('O Nome é obrigatório', 'error');
-        // console.log("erro")
+        console.log("erro", err)
     });
 }
+
+
+// function atualizarLista(idLista) {
+
+//     let data = {
+//         'nome': "tetet et e a s",
+//     };
+
+
+//     let url = `/api/listas/${idLista}`;
+//     fetch(url, {
+//         method: "PUT",
+//         body: JSON.stringify(data),
+//         headers: {
+//             "Content-type": "application/json; charset=UTF-8",
+//             "X-CSRFToken": jQuery("[name=csrfmiddlewaretoken]").val()
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+           
+//             return response.json().then(err => { throw new Error(err.error); });
+//         }
+//         return response.json();
+//     })
+//     .then(json => {
+//         listarListas();
+//         mostrarMensagem('Lista atualizada com sucesso!', 'success');
+//         // console.log('Lista Criada com sucesso!');
+//     })
+//     .catch(err => {
+//         mostrarMensagem('O Nome é obrigatório', 'error');
+//         // console.log("erro")
+//         // console.log("erro", err)
+
+//     });
+// }
+
 
 
 async function removerLista(listaId) {
@@ -52,7 +90,7 @@ async function removerLista(listaId) {
       }
   } catch (error) {
       mostrarMensagem(err.message, 'error')
-      console.error("Erro ao buscar dados: ", error);
+    //   console.error("Erro ao buscar dados: ", error);
   }
 }
 
@@ -82,6 +120,7 @@ async function listarListas() {
                                     <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
                                     <ul tabindex="0" class="dropdown-content dark:border-[#fff] dark:bg-[#3b3b3b] dark:text-white menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                                         <li><a class="text-[#cc1f0f]" onclick="removerLista(${lista.id})"> <i class="fa-regular fa-trash-can"></i> Apagar</a></li>
+                                        <li><a class="text-[#fff]" onclick="atualizarLista(${lista.id})">Atualizar</a></li>
                                     </ul>
                                 </div>
                             </div>

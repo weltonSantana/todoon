@@ -1,7 +1,7 @@
 {% if user.is_authenticated %}
 <dialog id="modalAjuda" class="modal">
   <div class="modal-box">
-    <h3 class="text-lg font-bold" id="modal-title">Bem-vindo ao todoOn!</h3>
+    <h3 class="text-lg font-bold" id="modal-title">Bem-vindo ao <strong class="text-[#367cdd]">todoOn!</strong></h3>
     <p class="py-4" id="modal-content">
       O sistema todoOn é um sistema de gerenciamento de tarefas simples. O primeiro passo é criar um projeto. Esse projeto será o quadro onde você criará listas e tarefas para cada lista.
     </p>
@@ -19,7 +19,7 @@
   // Definindo os textos para cada step
   const steps = [
     {
-      title: 'Bem-vindo ao todoOn!',
+      title: 'Bem-vindo ao <strong class="text-[#367cdd]">todoOn!</strong>',
       content: 'O sistema todoOn é um sistema de gerenciamento de tarefas simples. O primeiro passo é criar um quadro. Esse quadro será onde você criará listas e tarefas.'
     },
     {
@@ -37,8 +37,8 @@
   const nextButton = document.getElementById('next-step');
 
   function updateModal(stepIndex) {
-    modalTitle.textContent = steps[stepIndex].title;
-    modalContent.textContent = steps[stepIndex].content;
+    modalTitle.innerHTML = steps[stepIndex].title;
+    modalContent.innerHTML = steps[stepIndex].content;
 
     prevButton.classList.toggle('hidden', stepIndex === 0);
     nextButton.textContent = stepIndex === steps.length - 1 ? 'Fechar' : 'Próximo';

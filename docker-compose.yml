@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   db:
     container_name: todoon_postgresql
@@ -13,6 +11,7 @@ services:
       - POSTGRES_DB=${DB_NOME}
     volumes:
       - ./src/data/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
 
@@ -21,14 +20,14 @@ services:
     image: redis:alpine
     restart: always
     ports:
-      - 6379:6379 # Tornando o Redis acessível a outros containers na rede
+      - 6379:6379
     networks:
       - app-network
 
   web:
     container_name: todoon_app
     build: .
-    command: uvicorn project.asgi:application --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn project.asgi:application --host 0.0.0.0 --port 8000 --reload --reload-dir /app --reload-include '*.py' --reload-include '*.html' --reload-include '*.css' --reload-include '*.js' --reload-exclude '*.log'
     ports:
       - 8000:8000
     volumes:
@@ -46,3 +45,6 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  postgres_data:

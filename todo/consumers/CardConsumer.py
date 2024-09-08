@@ -1,4 +1,3 @@
-# myapp/consumers.py
 import json
 import redis
 from channels.generic.websocket import AsyncWebsocketConsumer

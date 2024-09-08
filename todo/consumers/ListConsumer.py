@@ -1,4 +1,3 @@
-# myapp/consumers.py
 
 import json
 import redis
@@ -28,7 +27,6 @@ class ListConsumer(AsyncWebsocketConsumer):
 
         if action == 'create':
             nome = data['nome']
-            # Aqui você pode implementar a lógica de criar uma nova lista
             # e armazenar no Redis, se necessário.
             # lista = Lista.objects.create(nome=nome)
             # await self.channel_layer.group_send(

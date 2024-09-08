@@ -1,4 +1,3 @@
-# myapp/consumers.py
 import json
 import redis
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -23,4 +22,3 @@ class ProjectConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)
         action = data.get('action')
-        # Aqui você pode coordenar ações entre listas e cartões

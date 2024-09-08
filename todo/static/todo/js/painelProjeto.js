@@ -56,46 +56,56 @@ async function listarListas() {
     try {
         var response = await fetch(`/api/listas?projeto=${projetoId}`);
         let data = await response.json();
-        // console.log(data);
         const container = document.getElementById('listas-container');
         container.innerHTML = ''; 
 
-        data.forEach(lista => {
-            const listaHtml = `
-                <div class="w-[400px] p-2 lista-dropzone dark:lista-dropzones" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
-                    <div class="">
-                        <div class="bg-gray-200 dark:bg-[#0F0E13] dark:text-[#fff] rounded-[10px] p-3 flex items-center justify-between">
-                            <p class="font-semibold ">${lista.nome}</p>
-                            <div class="dropdown dropdown-left">
-                                <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
-                                <ul tabindex="0" class="dropdown-content dark:border-[#fff] dark:bg-[#3b3b3b] dark:text-white menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                    <li><a class="" onclick="removerLista(${lista.id})">Apagar</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <div id="cartoes-container-${lista.id}" class="cartao-container " ondragover="dragOverCartao(event)">
-                        </div>
-                        
-                        <div id="form-criar-cartao-${lista.id}" style="display: none;" class="mt-2 ">
-                            <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="dark:bg-[#3b3b3b] input input-bordered dark:text-white w-full mb-2">
-                            <div class="flex justify-between mt-2">
-                                <button onclick="criarCartao(${lista.id})" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
-                                <button onclick="cancelarCriacaoCartao(${lista.id})" class="btn btn-sm text-gray-600">Cancelar</button>
-                            </div>
-                        </div>
+        if (data.length === 0) {
+            $('#ErroMensagem').show(); 
+        } else{
+            $('#ErroMensagem').hide(); 
 
-                        <div id="adicionar-cartao-btn-${lista.id}" class="mt-4">
-                            <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-6 p-4 bg-gray-100 text-gray-700 dark:text-white dark:outline-[#fff] dark:bg-[#1D1C1F]">+ Adicionar um cartão</button>
+            container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2';  
+
+            data.forEach(lista => {
+                const listaHtml = `
+                    <div class="text-black w-full sm:w-[300px] lg:w-[350px] p-2 lista-dropzone dark:lista-dropzones" id="lista-${lista.id}" ondragover="allowDrop(event)" ondrop="drop(event, ${lista.id})" ondragleave="dragLeave(event)">
+                        <div class="">
+                            <div class="bg-gray-200 dark:bg-[#0F0E13] dark:text-[#fff] rounded-[10px] p-3 flex items-center justify-between">
+                                <p class="font-semibold ">${lista.nome}</p>
+                                <div class="dropdown dropdown-left">
+                                    <div tabindex="0" role="button"><i class="fa-solid fa-ellipsis"></i></div>
+                                    <ul tabindex="0" class="dropdown-content dark:border-[#fff] dark:bg-[#3b3b3b] dark:text-white menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                        <li><a class="" onclick="removerLista(${lista.id})">Apagar</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div id="cartoes-container-${lista.id}" class="cartao-container " ondragover="dragOverCartao(event)">
+                            </div>
+                            
+                            <div id="form-criar-cartao-${lista.id}" style="display: none;" class="mt-2 ">
+                                <input type="text" name="titulo" id="nome_cartao_${lista.id}" placeholder="Título do cartão" class="dark:bg-[#3b3b3b] input input-bordered dark:text-white w-full mb-2">
+                                <div class="flex justify-between mt-2">
+                                    <button onclick="criarCartao(${lista.id})" class="dark:hover:bg-[#fff] dark:hover:text-[#1D1C1F]  dark:border-[#fff] dark:text-[#fff] dark:bg-[#1D1C1F] btn btn-sm bg-[#fff] border-1 border-[#202127] hover:text-[#fff] hover:bg-[#202127] m-0">Adicionar Cartão</button>
+                                    <button onclick="cancelarCriacaoCartao(${lista.id})" class="btn btn-sm text-gray-600">Cancelar</button>
+                                </div>
+                            </div>
+    
+                            <div id="adicionar-cartao-btn-${lista.id}" class="mt-4">
+                                <button onclick="mostrarFormCriarCartao(${lista.id})" class="outline-2 transition-all duration-300 rounded-[10px] w-full outline-dashed hover:p-6 p-4 bg-gray-100 text-gray-700 dark:text-white dark:outline-[#fff] dark:bg-[#1D1C1F]">+ Adicionar um cartão</button>
+                            </div>
                         </div>
+                        <hr class="mt-4 mb-2 dark:border-[#3b3b3b]">
                     </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', listaHtml);
-            listarCartoes(lista.id);
-        });
+                `;
+                container.insertAdjacentHTML('beforeend', listaHtml);
+                listarCartoes(lista.id);
+            });
+        }
+
     } catch (error) {
         console.error("Erro ao buscar listas: ", error);
+        $('#tabela-alimentos-projetos').html('<tr><td colspan="5" class="text-center">Erro ao carregar dados.</td></tr>');
     }
 }
 
@@ -221,15 +231,72 @@ function adicionarListenersDeDrag() {
 
 
 function mostrarMensagem(mensagem, tipo) {
-    const mensagemDiv = document.getElementById('alert-mensagem');
-    mensagemDiv.textContent = mensagem;
-    mensagemDiv.className = `alert alert-${tipo}`;
-    mensagemDiv.style.display = 'block';
-    mensagemDiv.style.color = '#fff';
+    const container = document.getElementById('alert-mensagem-container');
+
+    let icone, iconeColor;
+    if (tipo === 'success') {
+        icone = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path>
+        </svg>`;
+        iconeColor = 'text-[#2b9875]';
+    } else if (tipo === 'error') {
+        icone = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+        </svg>`;
+        iconeColor = 'text-red-600';
+    }
+
+    const alertHTML = `
+      <div id="alert-mensagem" class="fade-in fixed bottom-4 right-4 mb-14 flex flex-col gap-2 w-60 sm:w-72 text-[10px] sm:text-xs z-50">
+        <div class="cursor-default flex items-center dark:bg-white justify-between w-full h-12 sm:h-14 rounded-lg bg-[#232531] px-[10px]">
+          <div class="flex gap-2">
+            <div class="${iconeColor} bg-white/5 backdrop-blur-xl p-1 rounded-lg">
+              ${icone}
+            </div>
+            <div>
+              <p class="text-white dark:text-black">${mensagem}</p>
+              <p class="text-gray-500">This is the ${tipo} message</p>
+            </div>
+          </div>
+          <button class="text-gray-600 hover:bg-white/5 p-1 rounded-md transition-colors ease-linear" onclick="fecharMensagem()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    `;
+
+    container.innerHTML = alertHTML;
+
+    const alertMensagem = document.getElementById('alert-mensagem');
+    setTimeout(() => {
+        alertMensagem.classList.add('show');
+    }, 10);
 
     setTimeout(() => {
-        mensagemDiv.style.display = 'none';
-    }, 5000); 
+        fecharMensagem();
+    }, 5000);
+}
+
+function fecharMensagem() {
+    const alertMensagem = document.getElementById('alert-mensagem');
+    
+    alertMensagem.classList.remove('show');
+    alertMensagem.classList.add('hide');
+    
+    setTimeout(() => {
+        const container = document.getElementById('alert-mensagem-container');
+        container.innerHTML = '';
+    }, 500);
+}
+
+
+function fecharMensagem() {
+    const container = document.getElementById('alert-mensagem-container');
+    container.innerHTML = ''; 
 }
 
 
@@ -286,7 +353,7 @@ async function listarCartoes(listaId) {
 
         data.forEach(cartao => {
             const cartaoHtml = `
-                <div onclick="modalConteudoCartao${cartao.id}.showModal()" class="bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
+                <div onclick="modalConteudoCartao${cartao.id}.showModal()" class="text-black bg-gray-200 rounded-[10px] dark:bg-[#0F0E13] dark:text-[#fff]  p-3 mt-2 h-16 cartao" draggable="true" ondragstart="drag(event, ${cartao.id})" id="cartao-${cartao.id}">
                     <h3 class="font-semibold">${cartao.titulo}</h3>
                 </div>
             `;

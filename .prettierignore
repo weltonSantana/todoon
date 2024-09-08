@@ -1,0 +1,4 @@
+*.html
+*.jinja
+*.jinja2
+*.django
